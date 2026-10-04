@@ -265,3 +265,164 @@ h2 {
     flex-wrap: wrap;
     margin-bottom: 12px;
 }
+
+
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.song {
+    padding: 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.song-cover {
+    height: 92px;
+    margin-bottom: 10px;
+}
+
+.song h2 {
+    margin: 0 0 4px;
+    font-size: 0.9rem;
+}
+
+.song small {
+    display: block;
+    min-height: 32px;
+    color: var(--muted);
+    font-size: 0.7rem;
+}
+
+.song-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.song-actions .btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+}
+
+.focus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.focus-side {
+    display: grid;
+    gap: 16px;
+}
+
+.player-card h2 {
+    margin: 0;
+}
+
+.player-card input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.7rem;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin: 14px 0;
+}
+
+.icon-btn,
+.mini-controls button {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.play-btn,
+.mini-play {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+}
+
+.ambient {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+}
+
+.ambient input {
+    width: auto;
+}
+
+.timer-card h2 {
+    margin-top: 0;
+}
+
+.mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.timer {
+    margin: 20px 0;
+    font-size: 3.6rem;
+    font-weight: 800;
+}
+
+.center {
+    justify-content: center;
+}
+
+.session-info {
+    margin-top: 16px;
+}
+
+.list {
+    display: grid;
+    gap: 8px;
+    list-style: none;
+    text-align: left;
+}
+
+.list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+}
+
+.list .grow {
+    flex: 1;
+}
+
+.todo-form {
+    display: flex;
+    gap: 8px;
+}
+
+.todo-form input {
+    flex: 1;
+}
