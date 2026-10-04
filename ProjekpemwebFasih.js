@@ -1095,3 +1095,361 @@ audioPlayer.addEventListener(
     }
 );
 
+
+/* =========================
+   TRACK TIMER
+========================= */
+
+const pomo = {
+
+    mode: 25,
+
+    left: 1500,
+
+    running: false,
+
+    id: null
+
+};
+
+function renderTimer() {
+
+    $('#timer').textContent =
+        formatTime(pomo.left);
+
+
+    $('#tStart').textContent =
+        pomo.running
+            ? 'Jeda'
+            : 'Mulai Track';
+
+
+    $('#sessions').textContent =
+        state.sessions;
+
+}
+
+function toggleTimer() {
+
+    if (pomo.running) {
+
+        clearInterval(
+            pomo.id
+        );
+
+
+        pomo.running = false;
+
+
+        renderTimer();
+
+        return;
+
+    }
+
+    pomo.running = true;
+
+
+    pomo.id =
+        setInterval(() => {
+
+            pomo.left--;
+
+
+            if (pomo.left <= 0) {
+
+                clearInterval(
+                    pomo.id
+                );
+
+
+                pomo.running = false;
+
+
+                if (pomo.mode === 25) {
+
+                    state.sessions++;
+
+                    state.focusMinutes += 25;
+
+                    renderStats();
+
+
+                    alert(
+                        'Track selesai! Waktunya istirahat.'
+                    );
+
+                }
+
+
+                pomo.left =
+                    pomo.mode * 60;
+
+            }
+
+
+            renderTimer();
+
+        }, 1000);
+
+
+    renderTimer();
+
+}
+
+
+/* =========================
+   CLICK EVENT
+========================= */
+
+document.addEventListener(
+    'click',
+    e => {
+
+        const p =
+            e.target.closest(
+                '[data-page]'
+            );
+
+
+        if (p) {
+
+            e.preventDefault();
+
+            showPage(
+                p.dataset.page
+            );
+
+            return;
+
+        }
+
+
+
+        const g =
+            e.target.closest(
+                '[data-genre]'
+            );
+
+
+        if (g) {
+
+            state.genre =
+                g.dataset.genre;
+
+
+            renderChips();
+
+            renderPlaylist();
+
+            showPage(
+                'playlist'
+            );
+
+            return;
+
+        }
+
+        const pl =
+            e.target.closest(
+                '[data-play]'
+            );
+
+
+        if (pl) {
+
+            playSong(
+                Number(
+                    pl.dataset.play
+                ),
+                pl.closest('#grid') !== null
+            );
+
+            return;
+
+        }
+
+        const fav =
+            e.target.closest(
+                '[data-favorite]'
+            );
+
+
+        if (fav) {
+
+            const s =
+                songById(
+                    Number(
+                        fav.dataset.favorite
+                    )
+                );
+
+
+            s.favorite =
+                !s.favorite;
+
+
+            renderPlaylist();
+
+            renderStats();
+
+            return;
+
+        }
+
+        const rm =
+            e.target.closest(
+                '[data-remove]'
+            );
+
+
+        if (rm) {
+
+            const id =
+                Number(
+                    rm.dataset.remove
+                );
+
+
+            state.queue =
+                state.queue.filter(
+                    x => x !== id
+                );
+
+
+            renderQueue();
+
+            return;
+
+        }
+
+        const act =
+            e.target.closest(
+                '[data-act]'
+            );
+
+
+        if (act) {
+
+            if (
+                act.dataset.act ===
+                'toggle'
+            ) {
+
+                if (state.current) {
+
+                    setPlaying(
+                        !state.playing
+                    );
+
+                }
+
+                else {
+
+                    shuffle();
+
+                }
+
+            }
+
+
+            else if (
+                act.dataset.act ===
+                'next'
+            ) {
+
+                nextSong();
+
+            }
+
+
+            else {
+
+                prevSong();
+
+            }
+
+
+            return;
+
+        }
+
+        const mode =
+            e.target.closest(
+                '[data-mode]'
+            );
+
+
+        if (mode) {
+
+            pomo.mode =
+                Number(
+                    mode.dataset.mode
+                );
+
+
+            pomo.left =
+                pomo.mode * 60;
+
+
+            clearInterval(
+                pomo.id
+            );
+
+
+            pomo.running = false;
+
+
+            $$('[data-mode]').forEach(
+                b => {
+
+                    b.classList.toggle(
+                        'active',
+                        b === mode
+                    );
+
+                }
+            );
+
+
+            renderTimer();
+
+            return;
+
+        }
+
+        const del =
+            e.target.closest(
+                '[data-delete]'
+            );
+
+
+        if (del) {
+
+            const i =
+                todos.findIndex(
+                    t =>
+                        t.id ===
+                        Number(
+                            del.dataset.delete
+                        )
+                );
+
+
+            if (i > -1) {
+
+                todos.splice(
+                    i,
+                    1
+                );
+
+            }
+
+
+            renderTodos();
+
+        }
+
+    }
+);
+
