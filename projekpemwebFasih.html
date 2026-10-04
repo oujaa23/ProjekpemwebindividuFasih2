@@ -380,6 +380,125 @@
 
                 </article>
 
+                 <!-- TUGAS -->
+                <article class="card">
+
+                    <h2>
+                        Track Tugas
+                    </h2>
+
+                    <form
+                        id="todoForm"
+                        class="todo-form">
+
+                        <label
+                            class="sr-only"
+                            for="todoInput">
+                            Tugas
+                        </label>
+
+                        <input
+                            type="text"
+                            id="todoInput"
+                            placeholder="Tambahkan tugas yang ingin dikerjakan...">
+
+                        <button
+                            class="btn primary"
+                            type="submit">
+                            Tambah
+                        </button>
+
+                    </form>
+
+
+                    <ul
+                        class="list"
+                        id="todos">
+                    </ul>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- MINI PLAYER -->
+<aside
+    class="mini-player"
+    id="mini"
+    hidden>
+
+    <div
+        class="cover small"
+        id="mCover">
+        ♪
+    </div>
+
+
+    <div class="mini-info">
+
+        <strong id="mTitle">
+            -
+        </strong>
+
+        <small id="mArtist">
+            -
+        </small>
+
+    </div>
+
+
+    <div class="mini-controls">
+
+        <button data-act="prev">
+            |&lt;&lt;
+        </button>
+
+        <button
+            class="mini-play"
+            data-act="toggle">
+            ▶
+        </button>
+
+        <button data-act="next">
+            &gt;&gt;|
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- AUDIO PLAYER -->
+<audio
+    id="audioPlayer"
+    preload="metadata">
+</audio>
+
+
+
+<footer>
+
+    <p>
+        RuangNada © 2026 -
+        Playlist pendamping belajar
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
 
 
 
