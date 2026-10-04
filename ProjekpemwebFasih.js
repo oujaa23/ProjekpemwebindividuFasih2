@@ -933,3 +933,165 @@ function nextSong() {
 
 }
 
+
+/* =========================
+   PREVIOUS
+========================= */
+
+function prevSong() {
+
+    if (!state.queue.length) {
+        return;
+    }
+
+
+    const i =
+        state.queue.indexOf(
+            state.current
+        );
+
+
+    const prevIndex =
+        i === -1
+            ? 0
+            : (
+                i - 1 +
+                state.queue.length
+            ) %
+            state.queue.length;
+
+
+    playSong(
+        state.queue[prevIndex]
+    );
+
+}
+
+/* =========================
+   ACAK
+========================= */
+
+function shuffle() {
+
+    const shuffled =
+        [...songs]
+            .sort(
+                () => Math.random() - 0.5
+            );
+
+
+    state.queue =
+        shuffled.map(
+            s => s.id
+        );
+
+
+    const first =
+        shuffled[0];
+
+
+    if (first) {
+
+        playSong(
+            first.id
+        );
+
+    }
+
+}
+
+/* =========================
+   AUDIO EVENT
+========================= */
+
+audioPlayer.addEventListener(
+    'timeupdate',
+    () => {
+
+        state.elapsed =
+            audioPlayer.currentTime;
+
+
+        renderPlayer();
+
+    }
+);
+
+audioPlayer.addEventListener(
+    'loadedmetadata',
+    () => {
+
+        const s =
+            songById(state.current);
+
+
+        if (!s) {
+            return;
+        }
+
+
+        $('#fDur').textContent =
+            formatTime(
+                audioPlayer.duration
+            );
+
+
+        $('#seek').max =
+            audioPlayer.duration;
+
+    }
+);
+
+
+audioPlayer.addEventListener(
+    'play',
+    () => {
+
+        state.playing = true;
+
+        renderPlayer();
+
+    }
+);
+
+
+audioPlayer.addEventListener(
+    'pause',
+    () => {
+
+        state.playing = false;
+
+        renderPlayer();
+
+    }
+);
+
+
+audioPlayer.addEventListener(
+    'ended',
+    () => {
+
+        state.elapsed = 0;
+
+        nextSong();
+
+    }
+);
+
+
+audioPlayer.addEventListener(
+    'error',
+    () => {
+
+        state.playing = false;
+
+        console.error(
+            'File audio tidak ditemukan atau tidak dapat diputar:',
+            audioPlayer.src
+        );
+
+        renderPlayer();
+
+    }
+);
+
