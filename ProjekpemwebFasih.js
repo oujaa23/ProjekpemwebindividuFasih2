@@ -543,3 +543,206 @@ function renderPlaylist() {
             `;
 
 }
+
+
+/* =========================
+   QUEUE
+========================= */
+
+function renderQueue() {
+
+    $('#queue').innerHTML =
+        state.queue.length
+
+            ? state.queue.map((id, i) => {
+
+                const s =
+                    songById(id);
+
+
+                return `
+
+                    <li>
+
+                        <div
+                            class="cover small"
+                            style="${styleFor(s.genre)}">
+
+                            ♪
+
+                        </div>
+
+
+                        <span class="grow">
+
+                            <b>
+                                ${i + 1}.
+                                ${s.title}
+                            </b>
+
+                            <br>
+
+                            <small class="muted">
+                                ${s.artist} ·
+                                ${formatTime(s.duration)}
+                            </small>
+
+                        </span>
+
+
+                        <button
+                            data-remove="${id}">
+
+                            ✕
+
+                        </button>
+
+                    </li>
+
+                `;
+
+            }).join('')
+
+            : `
+
+                <li class="muted">
+                    Antrean kosong.
+                </li>
+
+            `;
+
+}
+
+/* =========================
+   TUGAS
+========================= */
+
+function renderTodos() {
+
+    $('#todos').innerHTML =
+        todos.map(t => `
+
+            <li>
+
+                <input
+                    type="checkbox"
+                    data-todo="${t.id}"
+                    ${t.done ? 'checked' : ''}>
+
+
+                <span class="grow">
+                    ${t.text}
+                </span>
+
+
+                <button
+                    data-delete="${t.id}">
+
+                    ✕
+
+                </button>
+
+            </li>
+
+        `).join('');
+
+}
+
+
+
+/* =========================
+   PLAYER UI
+========================= */
+
+function renderPlayer() {
+
+    const s =
+        songById(state.current);
+
+
+    $('#mini').hidden = !s;
+
+
+    $$('[data-act="toggle"]').forEach(
+        b => {
+
+            b.textContent =
+                state.playing
+                    ? 'Ⅱ'
+                    : '▶';
+
+        }
+    );
+
+
+    if (!s) {
+        return;
+    }
+
+
+    [
+
+        [
+            '#homeCover',
+            '#homeTitle',
+            '#homeArtist'
+        ],
+
+        [
+            '#fCover',
+            '#fTitle',
+            '#fArtist'
+        ]
+
+    ].forEach(x => {
+
+        $(x[0]).style.cssText =
+            styleFor(s.genre);
+
+
+        $(x[1]).textContent =
+            s.title;
+
+
+        $(x[2]).textContent =
+            s.artist +
+            ' · ' +
+            s.genre;
+
+    });
+
+
+    $('#mCover').style.cssText =
+        styleFor(s.genre);
+
+
+    $('#mTitle').textContent =
+        s.title;
+
+
+    $('#mArtist').textContent =
+        s.artist;
+
+
+    const duration =
+        audioPlayer.duration ||
+        s.duration;
+
+
+    $('#fDur').textContent =
+        formatTime(duration);
+
+
+    $('#seek').max =
+        duration;
+
+
+    $('#seek').value =
+        state.elapsed;
+
+
+    $('#fNow').textContent =
+        formatTime(state.elapsed);
+
+}
+
