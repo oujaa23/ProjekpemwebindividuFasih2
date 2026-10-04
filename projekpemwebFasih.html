@@ -134,3 +134,88 @@
 
     </section>
 
+    <!-- PLAYLIST -->
+    <section
+        id="playlist"
+        class="page">
+
+        <h1>
+            Koleksi Playlist
+        </h1>
+
+        <p class="muted">
+            Cari, saring, dan tambahkan lagu
+            ke antrean belajarmu.
+        </p>
+
+
+        <form
+            class="filters"
+            id="filterForm">
+
+            <div class="form-group">
+
+                <label for="search">
+                    Cari lagu atau artis
+                </label>
+
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="Contoh: Pop, Rock, Shoegaze..."
+                    autocomplete="off">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="sort">
+                    Urutkan
+                </label>
+
+                <select id="sort">
+
+                    <option value="default">
+                        Bawaan
+                    </option>
+
+                    <option value="title">
+                        Judul (A-Z)
+                    </option>
+
+                    <option value="duration">
+                        Durasi
+                    </option>
+
+                    <option value="favorite">
+                        Favorit dulu
+                    </option>
+
+                </select>
+
+            </div>
+
+        </form>
+
+
+        <div
+            class="chips"
+            id="chips">
+        </div>
+
+
+        <p
+            class="muted"
+            id="count">
+        </p>
+
+
+        <div
+            class="song-grid"
+            id="grid">
+        </div>
+
+    </section>
+
+
