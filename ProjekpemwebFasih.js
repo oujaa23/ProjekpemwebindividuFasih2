@@ -1453,3 +1453,202 @@ document.addEventListener(
     }
 );
 
+
+/* =========================
+   ACAK
+========================= */
+
+$('#btnAcak').addEventListener(
+    'click',
+    shuffle
+);
+
+/* =========================
+   SEARCH
+========================= */
+
+$('#search').addEventListener(
+    'input',
+    e => {
+
+        state.query =
+            e.target.value;
+
+        renderPlaylist();
+
+    }
+);
+
+/* =========================
+   SORT
+========================= */
+
+$('#sort').addEventListener(
+    'change',
+    e => {
+
+        state.sort =
+            e.target.value;
+
+        renderPlaylist();
+
+    }
+);
+
+/* =========================
+   SEEK
+========================= */
+
+$('#seek').addEventListener(
+    'input',
+    e => {
+
+        const value =
+            Number(
+                e.target.value
+            );
+
+
+        state.elapsed =
+            value;
+
+
+        if (
+            Number.isFinite(
+                audioPlayer.duration
+            )
+        ) {
+
+            audioPlayer.currentTime =
+                value;
+
+        }
+
+
+        renderPlayer();
+
+    }
+);
+
+/* =========================
+   TRACK TIMER BUTTON
+========================= */
+
+$('#tStart').addEventListener(
+    'click',
+    toggleTimer
+);
+
+/* =========================
+   RESET TIMER
+========================= */
+
+$('#tReset').addEventListener(
+    'click',
+    () => {
+
+        clearInterval(
+            pomo.id
+        );
+
+
+        pomo.running = false;
+
+
+        pomo.left =
+            pomo.mode * 60;
+
+
+        renderTimer();
+
+    }
+);
+
+/* =========================
+   TAMBAH TUGAS
+========================= */
+
+$('#todoForm').addEventListener(
+    'submit',
+    e => {
+
+        e.preventDefault();
+
+
+        const input =
+            $('#todoInput');
+
+
+        const text =
+            input.value.trim();
+
+
+        if (text) {
+
+            todos.push({
+
+                id: Date.now(),
+
+                text: text,
+
+                done: false
+
+            });
+
+
+            input.value = '';
+
+
+            renderTodos();
+
+        }
+
+    }
+);
+
+/* =========================
+   CHECK TUGAS
+========================= */
+
+$('#todos').addEventListener(
+    'change',
+    e => {
+
+        const c =
+            e.target.closest(
+                '[data-todo]'
+            );
+
+
+        if (c) {
+
+            const t =
+                todos.find(
+                    x =>
+                        x.id ===
+                        Number(
+                            c.dataset.todo
+                        )
+                );
+
+
+            if (t) {
+
+                t.done =
+                    c.checked;
+
+            }
+
+
+            renderTodos();
+
+        }
+
+    }
+);
+
+
+renderGenres();
+renderChips();
+renderTimer();
+renderAll();
