@@ -242,3 +242,157 @@ const styleFor = g =>
 
 const songById = id =>
     songs.find(s => s.id === id);
+
+
+/* =========================
+   NAVIGASI
+========================= */
+
+function showPage(page) {
+
+    $$('.page').forEach(p => {
+
+        p.classList.toggle(
+            'active',
+            p.id === page
+        );
+
+    });
+
+
+    $$('.nav-btn').forEach(b => {
+
+        b.classList.toggle(
+            'active',
+            b.dataset.page === page
+        );
+
+    });
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+
+}
+
+/* =========================
+   FILTER LAGU
+========================= */
+
+function visibleSongs() {
+
+    let r = songs.filter(s => {
+
+        const gm =
+            state.genre === 'Semua' ||
+            s.genre === state.genre;
+
+        const q =
+            state.query.toLowerCase();
+
+        return gm &&
+            `${s.title} ${s.artist} ${s.genre}`
+                .toLowerCase()
+                .includes(q);
+
+    });
+
+
+    if (state.sort === 'title') {
+
+        r.sort((a, b) =>
+            a.title.localeCompare(b.title)
+        );
+
+    }
+
+
+    else if (state.sort === 'duration') {
+
+        r.sort((a, b) =>
+            a.duration - b.duration
+        );
+
+    }
+
+
+    else if (state.sort === 'favorite') {
+
+        r.sort((a, b) =>
+            Number(b.favorite) -
+            Number(a.favorite)
+        );
+
+    }
+
+
+    return r;
+
+}
+
+/* =========================
+   STATISTIK
+========================= */
+
+function renderStats() {
+
+    const total =
+        songs.reduce(
+            (a, s) => a + s.duration,
+            0
+        );
+
+
+    const fav =
+        songs.filter(
+            s => s.favorite
+        ).length;
+
+
+    const data = [
+
+        [
+            songs.length,
+            'Lagu di koleksi'
+        ],
+
+        [
+            Math.round(total / 60) + ' mnt',
+            'Total durasi playlist'
+        ],
+
+        [
+            fav,
+            'Lagu favorit'
+        ],
+
+        [
+            state.focusMinutes + ' mnt',
+            'Fokus hari ini'
+        ]
+
+    ];
+
+
+    $('#stats').innerHTML =
+        data.map(x => `
+
+            <div class="stat">
+
+                <b>
+                    ${x[0]}
+                </b>
+
+                <span>
+                    ${x[1]}
+                </span>
+
+            </div>
+
+        `).join('');
+
+}
+
+
