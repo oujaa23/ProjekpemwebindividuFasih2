@@ -746,3 +746,190 @@ function renderPlayer() {
 
 }
 
+
+/* =========================
+   RENDER SEMUA
+========================= */
+
+function renderAll() {
+
+    renderStats();
+
+    renderPlaylist();
+
+    renderQueue();
+
+    renderTodos();
+
+    renderPlayer();
+
+}
+
+
+
+/* =========================
+   PUTAR LAGU
+========================= */
+
+function setPlaying(v) {
+
+    state.playing = v;
+
+
+    if (!audioPlayer.src) {
+
+        state.playing = false;
+
+        renderPlayer();
+
+        return;
+
+    }
+
+
+    if (v) {
+
+        audioPlayer.play()
+            .catch(error => {
+
+                console.error(
+                    'Gagal memutar audio:',
+                    error
+                );
+
+                state.playing = false;
+
+                renderPlayer();
+
+            });
+
+    }
+
+    else {
+
+        audioPlayer.pause();
+
+    }
+
+
+    renderPlayer();
+
+}
+
+
+
+/* =========================
+   PILIH LAGU
+========================= */
+
+function playSong(
+    id,
+    replace = false
+) {
+
+    const song =
+        songById(id);
+
+
+    if (!song) {
+        return;
+    }
+
+
+    if (replace) {
+
+        state.queue =
+            visibleSongs()
+                .map(s => s.id);
+
+    }
+
+
+    if (!state.queue.includes(id)) {
+
+        state.queue.push(id);
+
+    }
+
+
+    state.current = id;
+
+    state.elapsed = 0;
+
+
+    audioPlayer.pause();
+
+
+    audioPlayer.src =
+        song.audio;
+
+
+    audioPlayer.currentTime = 0;
+
+
+    audioPlayer.load();
+
+
+    audioPlayer.play()
+        .then(() => {
+
+            state.playing = true;
+
+            renderAll();
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                'Audio tidak dapat diputar:',
+                error
+            );
+
+            state.playing = false;
+
+            renderAll();
+
+        });
+
+
+    renderAll();
+
+}
+
+
+
+/* =========================
+   NEXT
+========================= */
+
+function nextSong() {
+
+    if (!state.queue.length) {
+
+        shuffle();
+
+        return;
+
+    }
+
+
+    const i =
+        state.queue.indexOf(
+            state.current
+        );
+
+
+    const nextIndex =
+        i === -1
+            ? 0
+            : (i + 1) %
+              state.queue.length;
+
+
+    playSong(
+        state.queue[nextIndex]
+    );
+
+}
+
