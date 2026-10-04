@@ -1,0 +1,267 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #6c5ce7;
+    --dark: #1e1b4b;
+    --bg: #f8f7ff;
+    --text: #1a1a2e;
+    --muted: #64648a;
+    --border: #e4e2f5;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 100px;
+}
+
+.topbar {
+    min-height: 58px;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.logo b,
+.eyebrow {
+    color: var(--primary);
+}
+
+.logo-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6c5ce7, #55d9cf);
+    color: white;
+}
+
+nav {
+    display: flex;
+    gap: 6px;
+}
+
+.nav-btn,
+.btn,
+.chip {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nav-btn {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+}
+
+.nav-btn.active,
+.btn.primary,
+.chip.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+main {
+    width: min(940px, calc(100% - 32px));
+    margin: auto;
+    padding: 22px 0;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+h2 {
+    font-size: 1.15rem;
+    margin: 28px 0 12px;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.description {
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 14px 0 20px;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+    padding: 32px 27px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #ece9ff, #e3fbf3);
+    align-items: center;
+}
+
+.hero h1 {
+    margin-top: 10px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.now-card,
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.cover {
+    display: grid;
+    place-items: center;
+    color: white;
+    border-radius: 14px;
+    font-size: 2rem;
+}
+
+.cover.big {
+    width: 184px;
+    height: 182px;
+    margin: 14px auto;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+}
+
+.cover.extra-large {
+    width: min(234px, 70%);
+    aspect-ratio: 1;
+    margin: 0 auto 14px;
+    background: linear-gradient(135deg, #2cc8bc, #5eead4);
+    font-size: 4rem;
+}
+
+.cover.small {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    font-size: 1rem;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat {
+    padding: 18px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.stat b {
+    display: block;
+    color: var(--primary);
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: 0.78rem;
+}
+
+.moods {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.mood {
+    min-height: 116px;
+    padding: 16px;
+    border: 0;
+    border-radius: 16px;
+    color: white;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin: 18px 0 14px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+.form-group input,
+.form-group select,
+.todo-form input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+}
+
+.chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
