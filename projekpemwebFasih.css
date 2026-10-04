@@ -475,3 +475,130 @@ footer {
     clip: rect(0, 0, 0, 0);
 }
 
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .hero,
+    .focus-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .moods {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .song-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 520px) {
+
+    .topbar {
+        padding: 10px 12px;
+    }
+
+    .nav-btn {
+        padding: 8px 9px;
+        font-size: 0.72rem;
+    }
+
+    main {
+        width: calc(100% - 24px);
+    }
+
+    .hero {
+        padding: 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .cover.big {
+        width: 166px;
+        height: 92px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 12px;
+    }
+
+    .stat b {
+        font-size: 1.25rem;
+    }
+
+    .moods {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .mood {
+        min-height: 60px;
+        padding: 12px;
+        font-size: 0.75rem;
+    }
+
+    .mood small,
+    .mood-icon {
+        display: none;
+    }
+
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .song-grid {
+        gap: 10px;
+    }
+
+    .song-cover {
+        height: 65px;
+    }
+
+    .song {
+        padding: 10px;
+    }
+
+    .song h2 {
+        font-size: 0.75rem;
+    }
+
+    .song small {
+        font-size: 0.62rem;
+    }
+
+    .cover.extra-large {
+        width: 190px;
+    }
+
+    .timer {
+        font-size: 3rem;
+    }
+
+    .mini-player {
+        width: calc(100% - 24px);
+        bottom: 10px;
+    }
+
+    .mini-controls button:not(.mini-play) {
+        display: none;
+    }
+}
+
