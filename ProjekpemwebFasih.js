@@ -396,3 +396,150 @@ function renderStats() {
 }
 
 
+/* =========================
+   GENRE
+========================= */
+
+function renderGenres() {
+
+    $('#moods').innerHTML =
+        Object.keys(genres)
+            .map(g => `
+
+                <button
+                    class="mood"
+                    data-genre="${g}"
+                    style="${styleFor(g)}">
+
+                    <span class="mood-icon">
+                        ${genres[g][2]}
+                    </span>
+
+                    <span>
+                        ${g}
+                    </span>
+
+                    <small>
+                        ${songs.filter(
+                            s => s.genre === g
+                        ).length}
+                        lagu
+                    </small>
+
+                </button>
+
+            `)
+            .join('');
+
+}
+
+/* =========================
+   CHIP
+========================= */
+
+function renderChips() {
+
+    const all = [
+        'Semua',
+        ...Object.keys(genres)
+    ];
+
+
+    $('#chips').innerHTML =
+        all.map(g => `
+
+            <button
+                type="button"
+                class="chip ${
+                    state.genre === g
+                        ? 'active'
+                        : ''
+                }"
+                data-genre="${g}">
+
+                ${g}
+
+            </button>
+
+        `).join('');
+
+}
+
+/* =========================
+   PLAYLIST
+========================= */
+
+function renderPlaylist() {
+
+    const list =
+        visibleSongs();
+
+
+    $('#count').textContent =
+        `Menampilkan ${list.length} dari ${songs.length} lagu`;
+
+
+    $('#grid').innerHTML =
+        list.length
+
+            ? list.map(s => `
+
+                <article class="song">
+
+                    <div
+                        class="cover song-cover"
+                        style="${styleFor(s.genre)}">
+
+                        ♪
+
+                    </div>
+
+
+                    <h2>
+                        ${s.title}
+                    </h2>
+
+
+                    <small>
+                        ${s.artist} · ${s.genre}
+                    </small>
+
+
+                    <div class="song-actions">
+
+                        <button
+                            class="btn primary"
+                            data-play="${s.id}">
+
+                            Putar
+
+                        </button>
+
+
+                        <button
+                            class="btn"
+                            data-favorite="${s.id}">
+
+                            ${
+                                s.favorite
+                                    ? '♥'
+                                    : '♡'
+                            }
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+            `).join('')
+
+            : `
+
+                <p class="muted">
+                    Lagu tidak ditemukan.
+                </p>
+
+            `;
+
+}
