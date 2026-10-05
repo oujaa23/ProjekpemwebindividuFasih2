@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuangNada</title>
+    <link rel="stylesheet" href="ProjekPemWebFasih.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <a href="#" class="logo" data-page="beranda">
+        <span class="logo-icon">♪</span>
+        Ruang<b>Nada</b>
+    </a>
+
+    <nav aria-label="Navigasi utama">
+        <button class="nav-btn active" data-page="beranda">
+            Beranda
+        </button>
+
+        <button class="nav-btn" data-page="playlist">
+            Playlist
+        </button>
+
+        <button class="nav-btn" data-page="fokus">
+            Ruang Fokus
+        </button>
+    </nav>
+
+</header>
+
+
+<main>
+
+
+    <!-- BERANDA -->
+    <section id="beranda" class="page active">
+
+        <article class="hero">
+
+            <div>
+
+                <p class="eyebrow">
+                    PLAYLIST UNTUK BELAJAR
+                </p>
+
+                <h1>
+                    Temukan nada yang bikin
+                    <span>fokus</span> tahan lama.
+                </h1>
+
+                <p class="description">
+                    Pilih suasana, putar musik,
+                    nyalakan timer Pomodoro,
+                    dan selesaikan tugasmu tanpa distraksi.
+                </p>
+
+                <div class="button-row">
+
+                    <button
+                        class="btn primary"
+                        data-page="fokus">
+                        Mulai Belajar
+                    </button>
+
+                    <button
+                        class="btn"
+                        id="btnAcak">
+                        Putar Acak
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <aside class="now-card">
+
+                <p class="eyebrow">
+                    SEDANG DIPUTAR
+                </p>
+
+                <div
+                    class="cover big"
+                    id="homeCover">
+                    ♪
+                </div>
+
+                <h2 id="homeTitle">
+                    Belum ada lagu
+                </h2>
+
+                <p
+                    class="muted"
+                    id="homeArtist">
+                    Pilih lagu untuk memulai
+                </p>
+
+            </aside>
+
+        </article>
+
+
+        <section>
+
+            <h2>
+                Ringkasan Belajarmu
+            </h2>
+
+            <div
+                class="stats"
+                id="stats">
+            </div>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+                Pilih Genre
+            </h2>
+
+            <div
+                class="moods"
+                id="moods">
+            </div>
+
+        </section>
+
+    </section>
+
+    <!-- PLAYLIST -->
+    <section
+        id="playlist"
+        class="page">
+
+        <h1>
+            Koleksi Playlist
+        </h1>
+
+        <p class="muted">
+            Cari, saring, dan tambahkan lagu
+            ke antrean belajarmu.
+        </p>
+
+
+        <form
+            class="filters"
+            id="filterForm">
+
+            <div class="form-group">
+
+                <label for="search">
+                    Cari lagu atau artis
+                </label>
+
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="Contoh: Pop, Rock, Shoegaze..."
+                    autocomplete="off">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="sort">
+                    Urutkan
+                </label>
+
+                <select id="sort">
+
+                    <option value="default">
+                        Bawaan
+                    </option>
+
+                    <option value="title">
+                        Judul (A-Z)
+                    </option>
+
+                    <option value="duration">
+                        Durasi
+                    </option>
+
+                    <option value="favorite">
+                        Favorit dulu
+                    </option>
+
+                </select>
+
+            </div>
+
+        </form>
+
+
+        <div
+            class="chips"
+            id="chips">
+        </div>
+
+
+        <p
+            class="muted"
+            id="count">
+        </p>
+
+
+        <div
+            class="song-grid"
+            id="grid">
+        </div>
+
+    </section>
+
+    <!-- RUANG FOKUS -->
+    <section
+        id="fokus"
+        class="page">
+
+        <h1>
+            Ruang Fokus
+        </h1>
+
+        <p class="muted">
+            Pemutar, Track Timer, dan daftar tugas
+            dalam satu tempat.
+        </p>
+
+
+        <div class="focus-grid">
+
+
+            <!-- PLAYER -->
+            <article class="card player-card">
+
+                <div
+                    class="cover extra-large"
+                    id="fCover">
+                    ♪
+                </div>
+
+                <h2 id="fTitle">
+                    Belum ada lagu
+                </h2>
+
+                <p
+                    class="muted"
+                    id="fArtist">
+                    -
+                </p>
+
+
+                <input
+                    type="range"
+                    id="seek"
+                    min="0"
+                    max="100"
+                    value="0"
+                    aria-label="Posisi lagu">
+
+
+                <div class="time-row">
+
+                    <span id="fNow">
+                        0:00
+                    </span>
+
+                    <span id="fDur">
+                        0:00
+                    </span>
+
+                </div>
+
+
+                <div class="player-controls">
+
+                    <button
+                        class="icon-btn"
+                        data-act="prev">
+                        |&lt;&lt;
+                    </button>
+
+                    <button
+                        class="play-btn"
+                        data-act="toggle">
+                        ▶
+                    </button>
+
+                    <button
+                        class="icon-btn"
+                        data-act="next">
+                        &gt;&gt;|
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <div class="focus-side">
+
+                
+                <!-- TRACK TIMER -->
+                <article class="card timer-card">
+
+                    <h2>
+                        Track Timer
+                    </h2>
+
+                    <div class="mode-buttons">
+
+                        <button
+                            class="chip active"
+                            data-mode="25">
+                            Track 25 Menit
+                        </button>
+
+                        <button
+                            class="chip"
+                            data-mode="5">
+                            Istirahat 5 Menit
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="timer"
+                        id="timer">
+                        25:00
+                    </div>
+
+
+                    <div class="button-row center">
+
+                        <button
+                            class="btn primary"
+                            id="tStart">
+                            Mulai Track
+                        </button>
+
+                        <button
+                            class="btn"
+                            id="tReset">
+                            Reset
+                        </button>
+
+                    </div>
+
+
+                    <p class="muted session-info">
+                        Track selesai hari ini:
+                        <span id="sessions">
+                            0
+                        </span>
+                    </p>
+
+                </article>
+
+
+
+                <!-- ANTREAN -->
+                <article class="card">
+
+                    <h2>
+                        Track List
+                    </h2>
+
+                    <ul
+                        class="list"
+                        id="queue">
+                    </ul>
+
+                </article>
+
+                 <!-- TUGAS -->
+                <article class="card">
+
+                    <h2>
+                        Track Tugas
+                    </h2>
+
+                    <form
+                        id="todoForm"
+                        class="todo-form">
+
+                        <label
+                            class="sr-only"
+                            for="todoInput">
+                            Tugas
+                        </label>
+
+                        <input
+                            type="text"
+                            id="todoInput"
+                            placeholder="Tambahkan tugas yang ingin dikerjakan...">
+
+                        <button
+                            class="btn primary"
+                            type="submit">
+                            Tambah
+                        </button>
+
+                    </form>
+
+
+                    <ul
+                        class="list"
+                        id="todos">
+                    </ul>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- MINI PLAYER -->
+<aside
+    class="mini-player"
+    id="mini"
+    hidden>
+
+    <div
+        class="cover small"
+        id="mCover">
+        ♪
+    </div>
+
+
+    <div class="mini-info">
+
+        <strong id="mTitle">
+            -
+        </strong>
+
+        <small id="mArtist">
+            -
+        </small>
+
+    </div>
+
+
+    <div class="mini-controls">
+
+        <button data-act="prev">
+            |&lt;&lt;
+        </button>
+
+        <button
+            class="mini-play"
+            data-act="toggle">
+            ▶
+        </button>
+
+        <button data-act="next">
+            &gt;&gt;|
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- AUDIO PLAYER -->
+<audio
+    id="audioPlayer"
+    preload="metadata">
+</audio>
+
+
+
+<footer>
+
+    <p>
+        RuangNada © 2026 -
+        Playlist pendamping belajar
+    </p>
+
+</footer>
+
+
+<script src="ProjekPemWebFasih.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
